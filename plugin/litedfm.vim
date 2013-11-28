@@ -3,29 +3,24 @@ let s:laststatus_default = &laststatus
 let s:ruler_default = &ruler
 let s:number_default = &number
 
+let s:context = has('gui_running') ? 'gui' : 'cterm'
+function! s:LoadColor(scope, swatch)
+  let scopeColor = synIDattr(hlID(a:scope), a:swatch, s:context)
+  return scopeColor < 0 ? 'none' : scopeColor
+endfunction
+
 function! LoadDFMColors()
-  let s:context = has('gui_running') ? 'gui' : 'cterm'
-
-  let s:NormalBG = synIDattr(hlID("Normal"), "bg", s:context)
-  let s:NormalBG = s:NormalBG < 0 ? 'none' : s:NormalBG
-
-  let s:LineNrFG = synIDattr(hlID("LineNr"), "fg", s:context)
-  let s:LineNrFG = s:LineNrFG < 0 ? 'none' : s:LineNrFG
-
-  let s:LineNrBG = synIDattr(hlID("LineNr"), "bg", s:context)
-  let s:LineNrBG = s:LineNrBG < 0 ? 'none' : s:LineNrBG
-
-  let s:NonTextFG = synIDattr(hlID("NonText"), "fg", s:context)
-  let s:NonTextFG = s:NonTextFG < 0 ? 'none' : s:NonTextFG
-
-  let s:NonTextBG = synIDattr(hlID("NonText"), "bg", s:context)
-  let s:NonTextBG = s:NonTextBG < 0 ? 'none' : s:NonTextBG
+  let s:NormalBG = s:LoadColor('Normal', 'bg')
+  let s:LineNrFG = s:LoadColor('LineNr', 'fg')
+  let s:LineNrBG = s:LoadColor('LineNr', 'bg')
+  let s:NonTextFG = s:LoadColor('NonText', 'fg')
+  let s:NonTextBG = s:LoadColor('NonText', 'bg')
 endfunction
 
 function! LiteDFM()
   let s:lite_dfm_on = 1
-  set number
   set noruler
+  set number
   set laststatus=0
   let currwin=winnr()
   execute 'windo set numberwidth=10'
