@@ -1,6 +1,7 @@
 " Remember user's default values for laststatus and ruler
 let s:laststatus_default = &laststatus
 let s:ruler_default = &ruler
+let s:number_default = &number
 
 function! LoadDFMColors()
   let s:context = has('gui_running') ? 'gui' : 'cterm'
@@ -17,6 +18,7 @@ endfunction
 
 function! LiteDFM()
   let s:lite_dfm_on = 1
+  set number
   set noruler
   set laststatus=0
   let currwin=winnr()
@@ -29,6 +31,9 @@ function! LiteDFMClose()
   let s:lite_dfm_on = 0
   if (s:ruler_default)
     set ruler
+  endif
+  if (!s:number_default)
+    set nonumber
   endif
   execute 'set laststatus=' . s:laststatus_default
   let currwin=winnr()
