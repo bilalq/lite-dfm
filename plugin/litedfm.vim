@@ -14,6 +14,12 @@ function! LoadDFMColors()
 
   let s:LineNrBG = synIDattr(hlID("LineNr"), "bg", s:context)
   let s:LineNrBG = s:LineNrBG < 0 ? 'none' : s:LineNrBG
+
+  let s:NonTextFG = synIDattr(hlID("NonText"), "fg", s:context)
+  let s:NonTextFG = s:NonTextFG < 0 ? 'none' : s:NonTextFG
+
+  let s:NonTextBG = synIDattr(hlID("NonText"), "bg", s:context)
+  let s:NonTextBG = s:NonTextBG < 0 ? 'none' : s:NonTextBG
 endfunction
 
 function! LiteDFM()
@@ -25,6 +31,7 @@ function! LiteDFM()
   execute 'windo set numberwidth=10'
   execute currwin . 'wincmd w'
   execute 'highlight LineNr ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
+  execute 'highlight NonText ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
 endfunction
 
 function! LiteDFMClose()
@@ -40,6 +47,7 @@ function! LiteDFMClose()
   execute 'windo set numberwidth=4'
   execute currwin . 'wincmd w'
   execute 'highlight LineNr ' . s:context . 'fg=' . s:LineNrFG . ' ' . s:context . 'bg=' . s:LineNrBG
+  execute 'highlight NonText ' . s:context . 'fg=' . s:NonTextFG . ' ' . s:context . 'bg=' . s:NonTextBG
 endfunction
 
 function! LiteDFMToggle()

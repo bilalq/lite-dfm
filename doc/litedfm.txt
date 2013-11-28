@@ -30,8 +30,10 @@ distraction-free-mode:
 
   Hide the statusbar
   Hide the ruler
-  For each window, change the width of the line number column to 10
+  Hide NonText foreground
+  Enable line numbering
   Change the fg and bg colors for LineNr to the same as Normal bg
+  For each window, change the width of the line number column to 10
   Revert to original settings upon closing distraction-free-mode
 
 
