@@ -1,0 +1,38 @@
+*litedfm.txt*  A lightweight distraction-free-mode for Vim
+
+Author: Bilal Quadri <http://bilalquadri.com/>
+License: MIT
+
+INTRODUCTION                                    *lite-dfm*
+
+This is inspired by Sublime Text's distraction free mode.
+
+COMMANDS                                        *lite-dfm-commands*
+
+:LiteDFM              Enters distraction free mode.
+
+:LiteDFMClose         Leaves distraction free mode.
+
+:LiteDFMToggle        Toggles distraction free mode.
+
+KNOWN ISSUES                                    *lite-dfm-issues*
+
+If you change your colorscheme after the plugin has loaded, the cached
+values for the line number coloring will be incorrect.
+
+If your colorscheme has a transparent normal background, the LineNr fg color
+will not be set in such a way to make it hidden.
+
+ABOUT                                           *lite-dfm-about*
+
+The current implementation does the following upon entering
+distraction-free-mode:
+
+  Hide the statusbar
+  Hide the ruler
+  For each window, change the width of the line number column to 10
+  Change the fg and bg colors for LineNr to the same as Normal bg
+  Revert to original settings upon closing distraction-free-mode
+
+
+vim:tw=78:et:ft=help:norl:
