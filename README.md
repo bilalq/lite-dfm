@@ -19,3 +19,11 @@ For Vundle, add this to your vimrc and run BundleInstall:
 Usage
 -----
 
+There are 3 commands that are exposed:
+* `LiteDFM`
+* `LiteDFMClose`
+* `LiteDFMToggle`
+
+For convenience, I would recommend setting up a mapping to quickly toggle.
+
+    nnoremap <Leader>z :LiteDFMToggle<CR>
