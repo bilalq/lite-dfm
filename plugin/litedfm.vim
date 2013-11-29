@@ -6,11 +6,11 @@ let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
 
 
-" See if running CLI or GUI Vim.
+" See if running CLI or GUI Vim
 let s:context = has('gui_running') ? 'gui' : 'cterm'
 
 
-" Retrieves the color for a provided scope and swatch in the current context.
+" Retrieves the color for a provided scope and swatch in the current context
 function! s:LoadColor(scope, swatch)
   let scopeColor = synIDattr(hlID(a:scope), a:swatch, s:context)
   return scopeColor < 0 ? 'none' : scopeColor
@@ -18,21 +18,21 @@ endfunction
 
 
 " Generates a highlight command for the provided scope, foreground, and
-" background.
+" background
 function! s:Highlight(scope, fg, bg)
   return 'highlight ' . a:scope . ' ' . s:context . 'fg=' . a:fg . ' ' . s:context . 'bg=' . a:bg
 endfunction
 
 
-" Generate a highlight string to hides the given scope by setting its
-" foreground and background the match the normal background.
+" Generate a highlight string that hides the given scope by setting its
+" foreground and background to match the normal background
 function! s:Hide(scope)
   return s:Highlight(a:scope, s:NormalBG, s:NormalBG)
 endfunction
 
 
-" Generate a highlight string to restore the given scope to its original
-" foreground and background values.
+" Generate a highlight string that restores the given scope to its original
+" foreground and background values
 function! s:Restore(scope)
   return s:Highlight(a:scope, s:[a:scope . 'FG'], s:[a:scope . 'BG'])
 endfunction
@@ -57,7 +57,7 @@ function! LoadDFMColors()
   let s:FoldColumnBG = s:LoadColor('FoldColumn', 'bg')
   if (exists('g:lite_dfm_normal_bg_' . s:context))
     " Allow users to manually specify the color used to hide UI elements
-    let s:NormalBG = has('gui_running') ? g:lite_dfm_normal_bg_gui : g:lite_dfm_normal_bg_cterm
+    let s:NormalBG = g:['lite_dfm_normal_bg_' . s:context]
   endif
 endfunction
 
