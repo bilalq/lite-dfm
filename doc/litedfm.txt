@@ -7,6 +7,7 @@ INTRODUCTION                                    *lite-dfm*
 
 This is inspired by Sublime Text's distraction free mode.
 
+
 COMMANDS                                        *lite-dfm-commands*
 
 :LiteDFM              Enters distraction free mode.
@@ -15,13 +16,23 @@ COMMANDS                                        *lite-dfm-commands*
 
 :LiteDFMToggle        Toggles distraction free mode.
 
+CUSTOMIZING                                     *lite-dfm-customizing*
+
+You can manually specify the color to be used for hiding UI elements. There
+are two global variables that can be used to override the one that is normally
+detected. One is for CLI Vim, while the other is for gui Vim. You can set
+these in your vimrc like so:
+
+  let g:lite_dfm_normal_bg_cterm = 234
+  let g:lite_dfm_normal_bg_gui = #abcabc
+
+If you are using a value of none for your background color, this is the only
+way you will be able to make this plugin properly hide your UI elements.
+
 KNOWN ISSUES                                    *lite-dfm-issues*
 
 If you change your colorscheme after the plugin has loaded, the cached
 values for the line number coloring will be incorrect.
-
-If your colorscheme has a transparent normal background, the LineNr fg color
-will not be set in such a way to make it hidden.
 
 ABOUT                                           *lite-dfm-about*
 

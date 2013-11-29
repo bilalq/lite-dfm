@@ -18,6 +18,11 @@ function! LoadDFMColors()
   let s:NonTextBG = s:LoadColor('NonText', 'bg')
   let s:FoldColumnFG = s:LoadColor('FoldColumn', 'fg')
   let s:FoldColumnBG = s:LoadColor('FoldColumn', 'bg')
+
+  " Allow users to manually specify the color used to hide UI elements
+  if (exists('g:lite_dfm_normal_bg'))
+    let s:NormalBG = has('gui_running') ? g:lite_dfm_normal_bg_cterm : g:lite_dfm_normal_bg_gui
+  endif
 endfunction
 
 function! LiteDFM()
@@ -51,7 +56,7 @@ function! LiteDFMClose()
 endfunction
 
 function! LiteDFMToggle()
-  if !exists("s:lite_dfm_on")
+  if !exists('s:lite_dfm_on')
     let s:lite_dfm_on = 0
   endif
   if s:lite_dfm_on
