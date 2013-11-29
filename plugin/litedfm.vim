@@ -37,11 +37,14 @@ function! s:Restore(scope)
   return s:Highlight(a:scope, s:[a:scope . 'FG'], s:[a:scope . 'BG'])
 endfunction
 
+
+" Execute the given command within each window
 function! s:ForEachWindow(cmd)
   let currwin=winnr()
   execute 'windo ' . a:cmd
   execute currwin . 'wincmd w'
 endfunction
+
 
 " Load all necessary colors and assign them to script-wide variables
 function! LoadDFMColors()
@@ -65,7 +68,7 @@ function! LiteDFM()
   set noruler
   set number
   set laststatus=0
-  execute s:ForEachWindow('set numberwidth=10 foldcolumn=12')
+  call s:ForEachWindow('set numberwidth=10 foldcolumn=12')
   execute s:Hide('LineNr')
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')
@@ -78,7 +81,7 @@ function! LiteDFMClose()
   let &ruler = s:ruler_default
   let &number = s:number_default
   let &laststatus = s:laststatus_default
-  execute s:ForEachWindow('set numberwidth=' . s:numberwidth_default . ' foldcolumn=' . s:foldcolumn_default)
+  call s:ForEachWindow('set numberwidth=' . s:numberwidth_default . ' foldcolumn=' . s:foldcolumn_default)
   execute s:Restore('LineNr')
   execute s:Restore('NonText')
   execute s:Restore('FoldColumn')
