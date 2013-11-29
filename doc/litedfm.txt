@@ -33,7 +33,9 @@ distraction-free-mode:
   Hide NonText foreground
   Enable line numbering
   Change the fg and bg colors for LineNr to the same as Normal bg
+  Change the fg and bg colors for FoldColumn to the same as Normal bg
   For each window, change the width of the line number column to 10
+  For each window, change the width of the foldcolumns to 12
   Revert to original settings upon closing distraction-free-mode
 
 
