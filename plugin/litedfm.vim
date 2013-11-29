@@ -30,7 +30,6 @@ function! LiteDFM()
   execute currwin . 'wincmd w'
   execute 'highlight LineNr ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
   execute 'highlight NonText ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
-  execute 'highlight NonText ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
   execute 'highlight FoldColumn ' . s:context . 'fg=' . s:NormalBG . ' ' . s:context . 'bg=' . s:NormalBG
 endfunction
 
@@ -48,7 +47,7 @@ function! LiteDFMClose()
   execute currwin . 'wincmd w'
   execute 'highlight LineNr ' . s:context . 'fg=' . s:LineNrFG . ' ' . s:context . 'bg=' . s:LineNrBG
   execute 'highlight NonText ' . s:context . 'fg=' . s:NonTextFG . ' ' . s:context . 'bg=' . s:NonTextBG
-  execute 'highlight FoldColumn ' . s:context . 'fg=' . s:FoldColumnBG . ' ' . s:context . 'bg=' . s:FoldColumnBG
+  execute 'highlight FoldColumn ' . s:context . 'fg=' . s:FoldColumnFG . ' ' . s:context . 'bg=' . s:FoldColumnBG
 endfunction
 
 function! LiteDFMToggle()
