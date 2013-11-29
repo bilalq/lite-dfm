@@ -42,7 +42,7 @@ detected. One is for CLI Vim, while the other is for gui Vim. You can set
 these in your vimrc like so:
 
     let g:lite_dfm_normal_bg_cterm = 234
-    let g:lite_dfm_normal_bg_gui = #abcabc
+    let g:lite_dfm_normal_bg_gui = '#abcabc'
 
 If you are using a value of none for your background color, this is the only
 way you will be able to make this plugin properly hide your UI elements.
