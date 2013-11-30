@@ -6,6 +6,19 @@ let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
 
 
+" Allow user to specify left offset as an integer between 1 and 22 inclusive
+if (!exists('g:lite_dfm_left_offset') || g:lite_dfm_left_offset < 1 || g:lite_dfm_left_offset > 22)
+  let g:lite_dfm_left_offset = 22
+endif
+if (g:lite_dfm_left_offset <= 10)
+  let s:numberwidth_offset = g:lite_dfm_left_offset
+  let s:foldcolumn_offset = 0
+else
+  let s:numberwidth_offset = 10
+  let s:foldcolumn_offset = g:lite_dfm_left_offset - 10
+endif
+
+
 " See if running CLI or GUI Vim
 let s:context = has('gui_running') ? 'gui' : 'cterm'
 
@@ -68,7 +81,7 @@ function! LiteDFM()
   set noruler
   set number
   set laststatus=0
-  call s:ForEachWindow('set numberwidth=10 foldcolumn=12')
+  call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
   execute s:Hide('LineNr')
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')

@@ -17,17 +17,22 @@ COMMANDS                                        *lite-dfm-commands*
 :LiteDFMToggle        Toggles distraction free mode.
 
 CUSTOMIZING                                     *lite-dfm-customizing*
-
 You can manually specify the color to be used for hiding UI elements. There
 are two global variables that can be used to override the one that is normally
 detected. One is for CLI Vim, while the other is for gui Vim. You can set
 these in your vimrc like so:
 
-  let g:lite_dfm_normal_bg_cterm = 234
-  let g:lite_dfm_normal_bg_gui = '#abcabc'
+    let g:lite_dfm_normal_bg_cterm = 234
+    let g:lite_dfm_normal_bg_gui = '#abcabc'
 
 If you are using a value of none for your background color, this is the only
 way you will be able to make this plugin properly hide your UI elements.
+
+You can also specify exactly how many columns from the left you want to
+offset for DFM. Any integer between 1 and 22 (inclusive) is a valid value.
+This value default to 22 if not specified.
+
+    let g:lite_dfm_left_offset = 12
 
 KNOWN ISSUES                                    *lite-dfm-issues*
 
@@ -39,15 +44,15 @@ ABOUT                                           *lite-dfm-about*
 The current implementation does the following upon entering
 distraction-free-mode:
 
-  Hide the statusbar
-  Hide the ruler
-  Hide NonText foreground
-  Enable line numbering
-  Change the fg and bg colors for LineNr to the same as Normal bg
-  Change the fg and bg colors for FoldColumn to the same as Normal bg
-  For each window, change the width of the line number column to 10
-  For each window, change the width of the foldcolumns to 12
-  Revert to original settings upon closing distraction-free-mode
+    Hide the statusbar
+    Hide the ruler
+    Enable line numbering
+    Change the fg and bg colors for LineNr to the same as Normal bg
+    Change the fg and bg colors for FoldColumn to the same as Normal bg
+    Change the fg and bg colors for NonText to the same as Normal bg
+    For each window, change the width of the line number and fold columns to
+      match the specified offset (default: 22)
+    Revert to original settings upon closing distraction-free-mode
 
 
 vim:tw=78:et:ft=help:norl:
