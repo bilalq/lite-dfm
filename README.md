@@ -1,7 +1,7 @@
 LiteDFM
 ========
 
-A lightweight way to remove distractions from Vim.
+A lightweight plugin to remove distractions from Vim.
 
 This is based loosely on *Distraction Free Mode* in Sublime Text.
 
@@ -35,12 +35,15 @@ this mapping instead:
 
 If you're a tmux user and really want to get fancy, this should interest you:
 
-    nnoremap <Leader>z :LiteDFMToggle<CR>:silent !tmux set status > /dev/null<CR>:redraw!<CR>
+    nnoremap <Leader>z :LiteDFMToggle<CR>:silent !tmux set status > /dev/null 2>&1<CR>:redraw!<CR>
 
 Customization
 -------------
+
 ### Left offset
-This plugin doesn't center, but instead offsets text from the left. You can specify exactly how many columns you want this offset to be. Any value from 1 to 22 is valid. By default, 22 is used.
+This plugin doesn't center, but instead offsets text from the left. You can
+specify exactly how many columns you want this offset to be. Any value from 1 to
+22 is valid. By default, 22 is used.
 
     let g:lite_dfm_left_offset = 16
 
