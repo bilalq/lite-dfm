@@ -7,16 +7,18 @@ let s:numberwidth_default = &numberwidth
 
 
 " Allow user to specify left offset as an integer between 1 and 22 inclusive
-if (!exists('g:lite_dfm_left_offset') || g:lite_dfm_left_offset < 1 || g:lite_dfm_left_offset > 22)
-  let g:lite_dfm_left_offset = 22
-endif
-if (g:lite_dfm_left_offset <= 10)
-  let s:numberwidth_offset = g:lite_dfm_left_offset
-  let s:foldcolumn_offset = 0
-else
-  let s:numberwidth_offset = 10
-  let s:foldcolumn_offset = g:lite_dfm_left_offset - 10
-endif
+function! s:LoadOffsets()
+  if (!exists('g:lite_dfm_left_offset') || g:lite_dfm_left_offset < 1 || g:lite_dfm_left_offset > 22)
+    let g:lite_dfm_left_offset = 22
+  endif
+  if (g:lite_dfm_left_offset <= 10)
+    let s:numberwidth_offset = g:lite_dfm_left_offset
+    let s:foldcolumn_offset = 0
+  else
+    let s:numberwidth_offset = 10
+    let s:foldcolumn_offset = g:lite_dfm_left_offset - 10
+  endif
+endfunction
 
 
 " See if running CLI or GUI Vim
@@ -60,7 +62,7 @@ endfunction
 
 
 " Load all necessary colors and assign them to script-wide variables
-function! LoadDFMColors()
+function! s:LoadDFMColors()
   let s:NormalBG = s:LoadColor('Normal', 'bg')
   let s:LineNrFG = s:LoadColor('LineNr', 'fg')
   let s:LineNrBG = s:LoadColor('LineNr', 'bg')
@@ -77,6 +79,8 @@ endfunction
 
 " Function to enter DFM
 function! LiteDFM()
+  call s:LoadDFMColors()
+  call s:LoadOffsets()
   let s:lite_dfm_on = 1
   set noruler
   set number
@@ -112,14 +116,6 @@ function! LiteDFMToggle()
     call LiteDFM()
   endif
 endfunction
-
-
-" Load colors and do so again whenever the colorscheme changes
-call LoadDFMColors()
-augroup dfm_events
-  autocmd!
-  autocmd ColorScheme call LoadDFMColors()
-augroup END
 
 
 " Map function calls to commands

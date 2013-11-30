@@ -36,8 +36,7 @@ This value default to 22 if not specified.
 
 KNOWN ISSUES                                    *lite-dfm-issues*
 
-If you change your colorscheme after the plugin has loaded, the cached
-values for the line number coloring will be incorrect.
+No known issues at this time.
 
 ABOUT                                           *lite-dfm-about*
 
