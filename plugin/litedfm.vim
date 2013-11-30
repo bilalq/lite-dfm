@@ -27,8 +27,8 @@ let s:context = has('gui_running') ? 'gui' : 'cterm'
 
 " Retrieves the color for a provided scope and swatch in the current context
 function! s:LoadColor(scope, swatch)
-  let scopeColor = synIDattr(hlID(a:scope), a:swatch, s:context)
-  return scopeColor < 0 ? 'none' : scopeColor
+  let l:scopeColor = synIDattr(hlID(a:scope), a:swatch, s:context)
+  return l:scopeColor < 0 ? 'none' : l:scopeColor
 endfunction
 
 
@@ -55,9 +55,9 @@ endfunction
 
 " Execute the given command within each window
 function! s:ForEachWindow(cmd)
-  let currwin=winnr()
+  let l:currwin=winnr()
   execute 'windo ' . a:cmd
-  execute currwin . 'wincmd w'
+  execute l:currwin . 'wincmd w'
 endfunction
 
 
