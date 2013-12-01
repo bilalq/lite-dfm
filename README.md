@@ -69,6 +69,6 @@ way you will be able to make this plugin properly hide your UI elements.
 Similar Plugins
 ---------------
 
-[VimRoom](http://projects.mikewest.org/vimroom/)
-[Distraction Free Writing with Vim](http://www.laktek.com/2012/09/05/distraction-free-writing-with-vim/)
-[goyo.vim](https://github.com/junegunn/goyo.vim)
+* [VimRoom](http://projects.mikewest.org/vimroom/)
+* [Distraction Free Writing with Vim](http://www.laktek.com/2012/09/05/distraction-free-writing-with-vim/)
+* [goyo.vim](https://github.com/junegunn/goyo.vim)
