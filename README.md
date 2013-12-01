@@ -5,6 +5,12 @@ A lightweight plugin to remove distractions from Vim.
 
 This is based loosely on *Distraction Free Mode* in Sublime Text.
 
+A key differentiator from most other implementations of distraction free writing
+in Vim is that support for vsplits remains uncrippled. This comes at the expense
+of proper centering, though, so there's a tradeoff.
+
+![Demo](https://raw.github.com/bilalq/i/master/demo.gif)
+
 Installation
 ------------
 
@@ -58,3 +64,11 @@ these in your vimrc like so:
 
 If you are using a value of none for your background color, this is the only
 way you will be able to make this plugin properly hide your UI elements.
+
+
+Similar Plugins
+---------------
+
+[VimRoom](http://projects.mikewest.org/vimroom/)
+[Distraction Free Writing with Vim](http://www.laktek.com/2012/09/05/distraction-free-writing-with-vim/)
+[goyo.vim](https://github.com/junegunn/goyo.vim)
