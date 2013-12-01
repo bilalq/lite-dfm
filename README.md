@@ -9,7 +9,7 @@ A key differentiator from most other implementations of distraction free writing
 in Vim is that support for vsplits remains uncrippled. This comes at the expense
 of proper centering, though, so there's a tradeoff.
 
-![Demo](https://raw.github.com/bilalq/i/master/demo.gif)
+![Demo](https://raw.github.com/bilalq/lite-dfm/master/demo.gif)
 
 Installation
 ------------
