@@ -79,7 +79,9 @@ endfunction
 
 " Function to enter DFM
 function! LiteDFM()
-  call s:LoadDFMColors()
+  if (!exists('s:lite_dfm_on') || !s:lite_dfm_on)
+    call s:LoadDFMColors()
+  endif
   call s:LoadOffsets()
   let s:lite_dfm_on = 1
   let &ruler = exists('g:lite_dfm_keep_ruler') && g:lite_dfm_keep_ruler
