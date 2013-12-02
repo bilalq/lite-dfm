@@ -46,13 +46,6 @@ If you're a tmux user and really want to get fancy, this should interest you:
 Customization
 -------------
 
-### Left offset
-This plugin doesn't center, but instead offsets text from the left. You can
-specify exactly how many columns you want this offset to be. Any value from 1 to
-22 is valid. By default, 22 is used.
-
-    let g:lite_dfm_left_offset = 16
-
 ### Colors
 You can manually specify the color to be used for hiding UI elements. There
 are two global variables that can be used to override the one that is normally
@@ -65,6 +58,18 @@ these in your vimrc like so:
 If you are using a value of none for your background color, this is the only
 way you will be able to make this plugin properly hide your UI elements.
 
+### Left offset
+This plugin doesn't center, but instead offsets text from the left. You can
+specify exactly how many columns you want this offset to be. Any value from 1 to
+22 is valid. By default, 22 is used.
+
+    let g:lite_dfm_left_offset = 16
+
+### Keeping the ruler
+You may prefer to have the ruler on when you have LiteDFM active. You can do so
+by adding this to your vimrc:
+
+    let g:lite_dfm_keep_ruler=1
 
 Similar Plugins
 ---------------

@@ -82,7 +82,7 @@ function! LiteDFM()
   call s:LoadDFMColors()
   call s:LoadOffsets()
   let s:lite_dfm_on = 1
-  set noruler
+  let &ruler = exists('g:lite_dfm_keep_ruler') && g:lite_dfm_keep_ruler
   set number
   set laststatus=0
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)

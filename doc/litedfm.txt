@@ -34,6 +34,11 @@ This value default to 22 if not specified.
 
     let g:lite_dfm_left_offset = 12
 
+If you prefer to keep the ruler active when LiteDFM is on, you can do so like
+this:
+
+    let g:lite_dfm_keep_ruler = 1
+
 KNOWN ISSUES                                    *lite-dfm-issues*
 
 No known issues at this time.
