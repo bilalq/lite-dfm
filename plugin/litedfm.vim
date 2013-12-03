@@ -4,6 +4,8 @@ let s:ruler_default = &ruler
 let s:number_default = &number
 let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
+let s:guioptions_default = &guioptions
+let s:fullscreen_default = &fullscreen
 
 
 " Allow user to specify left offset as an integer between 1 and 22 inclusive
@@ -91,6 +93,12 @@ function! LiteDFM()
   execute s:Hide('LineNr')
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')
+  if (has('gui_running'))
+    set guioptions-=T " Hide icons
+    set guioptions-=r " Hide scrollbar
+    set guioptions-=L " Hide NERDTree scrollbar
+    set fullscreen
+  endif
 endfunction
 
 
@@ -104,6 +112,10 @@ function! LiteDFMClose()
   execute s:Restore('LineNr')
   execute s:Restore('NonText')
   execute s:Restore('FoldColumn')
+  if (has('gui_running'))
+    let &fullscreen = s:fullscreen_default
+    let &guioptions = s:guioptions_default
+  endif
 endfunction
 
 
