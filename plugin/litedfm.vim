@@ -6,6 +6,7 @@ let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
 let s:guioptions_default = &guioptions
 let s:fullscreen_default = &fullscreen
+let s:gitgutter_default = exists('g:gitgutter_enabled') && g:gitgutter_enabled
 
 
 " Allow user to specify left offset as an integer between 1 and 22 inclusive
@@ -90,14 +91,20 @@ function! LiteDFM()
   set number
   set laststatus=0
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
+
   execute s:Hide('LineNr')
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')
+
   if (has('gui_running'))
     set guioptions-=T " Hide icons
     set guioptions-=r " Hide scrollbar
     set guioptions-=L " Hide NERDTree scrollbar
     set fullscreen
+  endif
+
+  if (g:gitgutter_enabled)
+    GitGutterDisable
   endif
 endfunction
 
@@ -109,12 +116,18 @@ function! LiteDFMClose()
   let &number = s:number_default
   let &laststatus = s:laststatus_default
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_default . ' foldcolumn=' . s:foldcolumn_default)
+
   execute s:Restore('LineNr')
   execute s:Restore('NonText')
   execute s:Restore('FoldColumn')
+
   if (has('gui_running'))
     let &fullscreen = s:fullscreen_default
     let &guioptions = s:guioptions_default
+  endif
+
+  if (s:gitgutter_default)
+    GitGutterEnable
   endif
 endfunction
 
