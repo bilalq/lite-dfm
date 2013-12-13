@@ -5,7 +5,9 @@ let s:number_default = &number
 let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
 let s:guioptions_default = &guioptions
-let s:gitgutter_default = exists('g:gitgutter_enabled') && g:gitgutter_enabled
+if exists('g:gitgutter_enabled')
+  let s:gitgutter_default = exists('g:gitgutter_enabled') && g:gitgutter_enabled
+endif
 if has('mac')
   let s:fullscreen_default = &fullscreen
 endif
@@ -105,9 +107,10 @@ function! LiteDFM()
       set fullscreen
     endif
   endif
-
-  if (g:gitgutter_enabled)
-    GitGutterDisable
+  if exists('g:gitgutter_enabled')
+    if (g:gitgutter_enabled)
+      GitGutterDisable
+    endif
   endif
 endfunction
 
@@ -130,9 +133,10 @@ function! LiteDFMClose()
     endif
     let &guioptions = s:guioptions_default
   endif
-
-  if (s:gitgutter_default)
-    GitGutterEnable
+  if exists('g:gitgutter_enabled')
+    if (s:gitgutter_default)
+      GitGutterEnable
+    endif
   endif
 endfunction
 
