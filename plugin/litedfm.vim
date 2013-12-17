@@ -4,20 +4,19 @@ let s:ruler_default = &ruler
 let s:number_default = &number
 let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
-let s:guioptions_default = &guioptions
-if exists('g:gitgutter_enabled')
-  let s:gitgutter_default = exists('g:gitgutter_enabled') && g:gitgutter_enabled
+let s:gitgutter_default = get(g:, 'gitgutter_enabled', 0)
+if has('gui_running')
+  let s:fullscreen_default = has('fullscreen') && &fullscreen
+  let s:guioptions_default = &guioptions
 endif
-if has('mac')
-  let s:fullscreen_default = &fullscreen
-endif
+
 
 " Allow user to specify left offset as an integer between 1 and 22 inclusive
 function! s:LoadOffsets()
-  if (!exists('g:lite_dfm_left_offset') || g:lite_dfm_left_offset < 1 || g:lite_dfm_left_offset > 22)
+  if !exists('g:lite_dfm_left_offset') || g:lite_dfm_left_offset < 1 || g:lite_dfm_left_offset > 22
     let g:lite_dfm_left_offset = 22
   endif
-  if (g:lite_dfm_left_offset <= 10)
+  if g:lite_dfm_left_offset <= 10
     let s:numberwidth_offset = g:lite_dfm_left_offset
     let s:foldcolumn_offset = 0
   else
@@ -85,12 +84,12 @@ endfunction
 
 " Function to enter DFM
 function! LiteDFM()
-  if (!exists('s:lite_dfm_on') || !s:lite_dfm_on)
+  if !get(s:, 'lite_dfm_on', 0)
     call s:LoadDFMColors()
   endif
   call s:LoadOffsets()
   let s:lite_dfm_on = 1
-  let &ruler = exists('g:lite_dfm_keep_ruler') && g:lite_dfm_keep_ruler
+  let &ruler = get(g:, 'lite_dfm_keep_ruler', 0)
   set number
   set laststatus=0
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
@@ -99,18 +98,17 @@ function! LiteDFM()
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')
 
-  if (has('gui_running'))
+  if has('gui_running')
     set guioptions-=T " Hide icons
     set guioptions-=r " Hide scrollbar
     set guioptions-=L " Hide NERDTree scrollbar
-    if has('mac')
+    if has('fullscreen')
       set fullscreen
     endif
   endif
-  if exists('g:gitgutter_enabled')
-    if (g:gitgutter_enabled)
-      GitGutterDisable
-    endif
+
+  if get(g:, 'gitgutter_enabled', 0)
+    GitGutterDisable
   endif
 endfunction
 
@@ -127,26 +125,22 @@ function! LiteDFMClose()
   execute s:Restore('NonText')
   execute s:Restore('FoldColumn')
 
-  if (has('gui_running'))
-    if has('mac')
+  if has('gui_running')
+    if has('fullscreen')
       let &fullscreen = s:fullscreen_default
     endif
     let &guioptions = s:guioptions_default
   endif
-  if exists('g:gitgutter_enabled')
-    if (s:gitgutter_default)
-      GitGutterEnable
-    endif
+
+  if s:gitgutter_default
+    GitGutterEnable
   endif
 endfunction
 
 
 " Function to toggle DFM
 function! LiteDFMToggle()
-  if !exists('s:lite_dfm_on')
-    let s:lite_dfm_on = 0
-  endif
-  if s:lite_dfm_on
+  if get(s:, 'lite_dfm_on', 0)
     call LiteDFMClose()
   else
     call LiteDFM()
