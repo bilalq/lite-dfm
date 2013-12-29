@@ -30,8 +30,8 @@ endfunction
 let s:context = has('gui_running') ? 'gui' : 'cterm'
 
 
-" Build list of windows on which operations should not be run
-let s:ignoredWindows = ['tagbar', 'nerdtree']
+" List of filetypes where window offsets should not be done
+let s:ignoredWindows = ['gundo', 'nerdtree', 'tagbar']
 
 
 " Retrieves the color for a provided scope and swatch in the current context
@@ -62,12 +62,14 @@ function! s:Restore(scope)
 endfunction
 
 
-" Execute the given command within each window
+" Execute the given command within each window that is not ignored
 function! s:ForEachWindow(cmd)
-  let l:currWin = winnr()
-  let l:cmd = 'if index(s:ignoredWindows, &filetype) < 0 | ' . a:cmd . ' | endif'
+  let l:initialWindow = winnr()
+  let l:isNotIgnoredWindow = '(index(s:ignoredWindows, &filetype) < 0)'
+  let l:isNotGundoDiff = '(bufname(winbufnr(0)) !=# "__Gundo_Preview__")'
+  let l:cmd = 'if (' . l:isNotIgnoredWindow . ' && ' . l:isNotGundoDiff . ') | ' . a:cmd . ' | endif'
   execute 'windo ' . l:cmd
-  execute l:currWin . 'wincmd w'
+  execute l:initialWindow . 'wincmd w'
 endfunction
 
 
