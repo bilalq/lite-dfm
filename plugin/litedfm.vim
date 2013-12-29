@@ -30,6 +30,10 @@ endfunction
 let s:context = has('gui_running') ? 'gui' : 'cterm'
 
 
+" Build list of windows on which operations should not be run
+let s:ignoredWindows = ['tagbar', 'nerdtree']
+
+
 " Retrieves the color for a provided scope and swatch in the current context
 function! s:LoadColor(scope, swatch)
   let l:scopeColor = synIDattr(hlID(a:scope), a:swatch, s:context)
@@ -60,25 +64,24 @@ endfunction
 
 " Execute the given command within each window
 function! s:ForEachWindow(cmd)
-  let l:currwin=winnr()
-  execute 'windo ' . a:cmd
-  execute l:currwin . 'wincmd w'
+  let l:currWin = winnr()
+  let l:cmd = 'if index(s:ignoredWindows, &filetype) < 0 | ' . a:cmd . ' | endif'
+  execute 'windo ' . l:cmd
+  execute l:currWin . 'wincmd w'
 endfunction
 
 
 " Load all necessary colors and assign them to script-wide variables
 function! s:LoadDFMColors()
-  let s:NormalBG = s:LoadColor('Normal', 'bg')
   let s:LineNrFG = s:LoadColor('LineNr', 'fg')
   let s:LineNrBG = s:LoadColor('LineNr', 'bg')
   let s:NonTextFG = s:LoadColor('NonText', 'fg')
   let s:NonTextBG = s:LoadColor('NonText', 'bg')
   let s:FoldColumnFG = s:LoadColor('FoldColumn', 'fg')
   let s:FoldColumnBG = s:LoadColor('FoldColumn', 'bg')
-  if (exists('g:lite_dfm_normal_bg_' . s:context))
-    " Allow users to manually specify the color used to hide UI elements
-    let s:NormalBG = g:['lite_dfm_normal_bg_' . s:context]
-  endif
+
+  " Allow users to manually specify the color used to hide UI elements
+  let s:NormalBG = get(g:, 'lite_dfm_normal_bg_' . s:context, s:LoadColor('Normal', 'bg'))
 endfunction
 
 
@@ -89,6 +92,11 @@ function! LiteDFM()
   endif
   call s:LoadOffsets()
   let s:lite_dfm_on = 1
+
+  if get(g:, 'gitgutter_enabled', 0)
+    GitGutterDisable
+  endif
+
   let &ruler = get(g:, 'lite_dfm_keep_ruler', 0)
   set number
   set laststatus=0
@@ -106,16 +114,17 @@ function! LiteDFM()
       set fullscreen
     endif
   endif
-
-  if get(g:, 'gitgutter_enabled', 0)
-    GitGutterDisable
-  endif
 endfunction
 
 
 " Function to close DFM
 function! LiteDFMClose()
   let s:lite_dfm_on = 0
+
+  if s:gitgutter_default
+    GitGutterEnable
+  endif
+
   let &ruler = s:ruler_default
   let &number = s:number_default
   let &laststatus = s:laststatus_default
@@ -130,10 +139,6 @@ function! LiteDFMClose()
       let &fullscreen = s:fullscreen_default
     endif
     let &guioptions = s:guioptions_default
-  endif
-
-  if s:gitgutter_default
-    GitGutterEnable
   endif
 endfunction
 
