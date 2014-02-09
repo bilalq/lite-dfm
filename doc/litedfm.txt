@@ -50,12 +50,16 @@ distraction-free-mode:
 
     Hide the statusbar
     Hide the ruler
-    Enable line numbering
+    Hide GitGutter if it is enabled
+    For each window, change the width of the line number and fold columns to:
+      Unless the window is Gundo, NERDTree, or Tagbar:
+        Enable line numbering
+        Match the specified offset (default: 22)
     Change the fg and bg colors for LineNr to the same as Normal bg
-    Change the fg and bg colors for FoldColumn to the same as Normal bg
     Change the fg and bg colors for NonText to the same as Normal bg
-    For each window, change the width of the line number and fold columns to
-      match the specified offset (default: 22)
+    Change the fg and bg colors for FoldColumn to the same as Normal bg
+    If user is in GUI:
+      Hide menu and scrollbar chrome, then go fullscreen
     Revert to original settings upon closing distraction-free-mode
 
 
