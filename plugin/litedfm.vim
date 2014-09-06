@@ -132,9 +132,15 @@ function! LiteDFMClose()
   let &laststatus = s:laststatus_default
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_default . ' foldcolumn=' . s:foldcolumn_default)
 
-  execute s:Restore('LineNr')
-  execute s:Restore('NonText')
-  execute s:Restore('FoldColumn')
+  try
+    execute s:Restore('LineNr')
+    execute s:Restore('NonText')
+    execute s:Restore('FoldColumn')
+  catch /.*/
+    " Attempting to Restore values fails when they were never changed to begin
+    " with. This is VimScript, so we don't care and just swallow the
+    " exception.
+  endtry
 
   if has('gui_running')
     if has('fullscreen')
