@@ -77,6 +77,8 @@ endfunction
 function! s:LoadDFMColors()
   let s:LineNrFG = s:LoadColor('LineNr', 'fg')
   let s:LineNrBG = s:LoadColor('LineNr', 'bg')
+  let s:CursorLineNRFG = s:LoadColor('CursorLineNR', 'fg')
+  let s:CursorLineNRBG = s:LoadColor('CursorLineNR', 'bg')
   let s:NonTextFG = s:LoadColor('NonText', 'fg')
   let s:NonTextBG = s:LoadColor('NonText', 'bg')
   let s:FoldColumnFG = s:LoadColor('FoldColumn', 'fg')
@@ -105,6 +107,7 @@ function! LiteDFM()
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
 
   execute s:Hide('LineNr')
+  execute s:Hide('CursorLineNR')
   execute s:Hide('NonText')
   execute s:Hide('FoldColumn')
 
@@ -134,6 +137,7 @@ function! LiteDFMClose()
 
   try
     execute s:Restore('LineNr')
+    execute s:Restore('CursorLineNR')
     execute s:Restore('NonText')
     execute s:Restore('FoldColumn')
   catch /.*/
