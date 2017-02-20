@@ -47,6 +47,16 @@ function! s:Highlight(scope, fg, bg)
   return 'highlight ' . a:scope . ' ' . s:context . 'fg=' . a:fg . ' ' . s:context . 'bg=' . a:bg
 endfunction
 
+" TODO: refine
+function! HighlightSentences()
+    " >>> string.punctuation without some inline punctuation
+    " The careful reader will note that a few emoticons are punctuation :)
+    " TODO: unicode
+    let punkt = '!"&()+,.\/:;<=>?[`{|'.'\]\}'
+    let sentence_rx = '\V\(\[^'.punkt.']\|\n\)\*\%#'
+    highlight SentenceL ctermfg=green
+    let m = matchadd("SentenceL", sentence_rx)
+endfunction
 
 " Generate a highlight string that hides the given scope by setting its
 " foreground and background to match the normal background
@@ -166,6 +176,7 @@ endfunction
 
 
 " Map function calls to commands
+command! HighlightSentences call HighlightSentences()
 command! LiteDFM call LiteDFM()
 command! LiteDFMClose call LiteDFMClose()
 command! LiteDFMToggle call LiteDFMToggle()
