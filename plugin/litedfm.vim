@@ -27,7 +27,12 @@ endfunction
 
 
 " See if running CLI or GUI Vim
-let s:context = has('gui_running') ? 'gui' : 'cterm'
+" If user has termguicolors enabled, gui vim is chosen regardless.
+if (&termguicolors)
+    let s:context = 'gui'
+else
+    let s:context = has('gui_running') ? 'gui' : 'cterm'
+endif
 
 
 " List of filetypes where window offsets should not be done
