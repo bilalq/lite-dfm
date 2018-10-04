@@ -5,6 +5,7 @@ let s:number_default = &number
 let s:foldcolumn_default = &foldcolumn
 let s:numberwidth_default = &numberwidth
 let s:gitgutter_default = get(g:, 'gitgutter_enabled', 0)
+let s:stal_default = &showtabline
 if has('gui_running')
   let s:fullscreen_default = has('fullscreen') && &fullscreen
   let s:guioptions_default = &guioptions
@@ -28,12 +29,7 @@ endfunction
 
 " See if running CLI or GUI Vim
 " If user has termguicolors enabled, gui vim is chosen regardless.
-if (&termguicolors)
-    let s:context = 'gui'
-else
-    let s:context = has('gui_running') ? 'gui' : 'cterm'
-endif
-
+let s:context = (has('gui_running') || &termguicolors) ? 'gui' : 'cterm'
 
 " List of filetypes where window offsets should not be done
 let s:ignoredWindows = ['gundo', 'nerdtree', 'tagbar']
@@ -109,6 +105,7 @@ function! LiteDFM()
   let &ruler = get(g:, 'lite_dfm_keep_ruler', 0)
   set number
   set laststatus=0
+  set showtabline=1
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
 
   execute s:Hide('LineNr')
@@ -138,6 +135,7 @@ function! LiteDFMClose()
   let &ruler = s:ruler_default
   let &number = s:number_default
   let &laststatus = s:laststatus_default
+  let &showtabline= s:stal_default
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_default . ' foldcolumn=' . s:foldcolumn_default)
 
   try
