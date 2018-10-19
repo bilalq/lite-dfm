@@ -105,7 +105,7 @@ function! LiteDFM()
   let &ruler = get(g:, 'lite_dfm_keep_ruler', 0)
   set number
   set laststatus=0
-  set showtabline=1
+  set showtabline=0
   call s:ForEachWindow('set numberwidth=' . s:numberwidth_offset . ' foldcolumn=' . s:foldcolumn_offset)
 
   execute s:Hide('LineNr')
