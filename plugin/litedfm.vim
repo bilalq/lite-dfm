@@ -172,3 +172,4 @@ endfunction
 command! LiteDFM call LiteDFM()
 command! LiteDFMClose call LiteDFMClose()
 command! LiteDFMToggle call LiteDFMToggle()
+" vim: tabstop=2
